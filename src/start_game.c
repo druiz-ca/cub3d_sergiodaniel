@@ -6,9 +6,11 @@
 /*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 06:51:54 by daniel            #+#    #+#             */
-/*   Updated: 2024/12/14 08:21:49 by daniel           ###   ########.fr       */
+/*   Updated: 2024/12/14 09:24:10 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3d.h"
 
 /* Ft para manejar eventos durante la ejecución del juego */
 void	ft_hook(void *param)

@@ -6,13 +6,14 @@
 /*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 08:22:50 by daniel            #+#    #+#             */
-/*   Updated: 2024/12/14 08:46:10 by daniel           ###   ########.fr       */
+/*   Updated: 2024/12/14 08:50:58 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* Ft para ajustar el ángulo del jugador */
+/* Ft para ajustar el ángulo del jugador (se usa una var de tipo souble para
+angle porque ésta permite una mayor precisión en la cifra)*/
 void    move_player_by_angle(t_data *data, double angle)
 {
     double  move_x;

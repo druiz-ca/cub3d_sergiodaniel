@@ -6,11 +6,26 @@
 /*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 11:51:53 by daniel            #+#    #+#             */
-/*   Updated: 2024/12/14 12:10:50 by daniel           ###   ########.fr       */
+/*   Updated: 2024/12/15 14:14:57 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/* establecer el angulo del jugador: parece que segun a la dir donde apunte
+se establece un ángulo en concreto, empezando en 0 cuando apunta al ESTE ? y
+va aumentando en el sentido de las agujas del reloj */
+void	set_player_angle(t_data *data, char c)
+{
+	if (c == 'N')
+		data->player.angle = 270;
+	if (c == 'S')
+		data->player.angle = 90;
+	if (c == 'W')
+		data->player.angle = 180;
+	if (c == 'E')
+		data->player.angle = 0;
+}
 
 /* inicializa los ángulos de los rayos del jugador, distribuyéndolos 
 uniformemente a lo largo del campo de visión del jugador y asegurándose de que

@@ -6,11 +6,59 @@
 /*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 09:57:24 by daniel            #+#    #+#             */
-/*   Updated: 2024/12/15 10:56:21 by daniel           ###   ########.fr       */
+/*   Updated: 2024/12/15 14:12:02 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "cub3d.h"
+
+/* calcula la distancia hipotenusa que un rayo ha recorrido desde la posición 
+del jugador hasta el punto de impacto con una pared, utilizando la fórmula de 
+la distancia euclidiana y ajustando según la dirección del rayo y el tipo de 
+impacto (vertical u horizontal).*/
+void    calculate_hypotenuse_distance(t_ray *ray)
+{
+	if (ray->flag == 0 && ray->ray_dir_x > 0)
+		ray->hyp_distance = sqrt(pow((ray->map_x - \
+			ray->pos_x), 2) + pow((ray->hit - ray->pos_y), 2));
+	else if (ray->flag == 0 && ray->ray_dir_x < 0)
+		ray->hyp_distance = sqrt(pow(((ray->map_x + 1) - \
+			ray->pos_x), 2) + pow((ray->hit - ray->pos_y), 2));
+	else if (ray->flag == 1 && ray->ray_dir_y > 0)
+		ray->hyp_distance = sqrt(pow((ray->hit - \
+			ray->pos_x), 2) + pow((ray->map_y - ray->pos_y), 2));
+	else
+		ray->hyp_distance = sqrt(pow((ray->hit - \
+			ray->pos_x), 2) + pow(((ray->map_y + 1) - ray->pos_y), 2));
+}
+
+/* calcula la posición horizontal del impacto de un rayo en términos de píxeles
+en la pantalla cuando el rayo impacta en una pared vertical.*/
+void    ver_pixel_impact(t_ray *ray)
+{
+    if (ray->ray_dir_x > 0 && ray->ray_dir_y >= 0)
+        ray->pixel_width_impact = (ray->hit - ray->map_y) * 1920;
+    else if (ray->ray_dir_x <= 0 && ray->ray_dir_y > 0)
+        ray->pixel_width_impact = (ray->hit - ray->map_y) * 1920;
+    else if (ray->ray_dir_x >= 0 && ray->ray_dir_y < 0)
+        ray->pixel_width_impact = (ray->hit - ray->map_y) * 1920;
+    else if (ray->ray_dir_x < 0 && ray->ray_dir_y <= 0)
+        ray->pixel_width_impact = (ray->hit - ray->map_y) * 1920;
+}
+
+/* calcula la posición horizontal del impacto del rayo en términos de píxeles 
+en la pantalla, ajustando según la dirección del rayo en los ejes x e y*/
+void    hor_pixel_impact(t_ray *ray)
+{
+	if (ray->ray_dir_x > 0 && ray->ray_dir_y >= 0)
+		ray->pixel_width_impact = (ray->hit - ray->map_x) * 1920;
+	else if (ray->ray_dir_x <= 0 && ray->ray_dir_y > 0)
+		ray->pixel_width_impact = (ray->hit - ray->map_x) * 1920;
+	else if (ray->ray_dir_x >= 0 && ray->ray_dir_y < 0)
+		ray->pixel_width_impact = (ray->hit - ray->map_x) * 1920;
+	else if (ray->ray_dir_x < 0 && ray->ray_dir_y <= 0)
+		ray->pixel_width_impact = (ray->hit - ray->map_x) * 1920;
+}
 
 /* configura las variables iniciales necesarias para el cálculo de la 
 trayectoria del rayo, incluyendo su posición, dirección y pasos en los ejes 
